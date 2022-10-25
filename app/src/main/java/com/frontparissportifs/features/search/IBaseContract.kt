@@ -12,10 +12,6 @@ interface IBaseContract {
         fun detach()
     }
 
-    interface Model {
-
-    }
-
-
+    interface Model
 
 }
