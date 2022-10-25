@@ -4,12 +4,12 @@ import com.frontparissportifs.model.Team
 
 interface ISearchContract:IBaseContract {
 
-    interface View:IBaseContract.View {
+    interface View:IBaseContract.View,Model.OnSearchFinishedListener  {
         fun getSearchValue():String
     }
 
-    interface Model {
-        fun searchTeams(leagueName:String)
+    interface Model:IBaseContract.Model {
+        fun searchTeams(leagueName:String?)
 
         interface OnSearchFinishedListener {
             fun success(teams:List<Team>)
@@ -17,7 +17,7 @@ interface ISearchContract:IBaseContract {
         }
     }
 
-    interface Presenter:IBaseContract.Presenter<View> {
+    interface Presenter:IBaseContract.Presenter<View, Model>{
 
         fun onSearchClick()
 

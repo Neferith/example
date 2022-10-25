@@ -24,7 +24,6 @@ constructor() : EntityMapper<TeamObjectResponse, Team> {
         TODO("Not yet implemented")
     }
 
-
     fun extractLeagues(entity: TeamObjectResponse): List<League> {
 
        val  leagues:ArrayList<League> = ArrayList()
