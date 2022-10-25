@@ -1,22 +1,25 @@
 package com.frontparissportifs.features.search
 
-interface ISearchContract {
+import com.frontparissportifs.model.Team
 
-    interface View {
+interface ISearchContract:IBaseContract {
 
+    interface View:IBaseContract.View {
         fun getSearchValue():String
-
     }
 
     interface Model {
         fun searchTeams(leagueName:String)
+
+        interface OnSearchFinishedListener {
+            fun success(teams:List<Team>)
+            fun onFailure(codeError:String , message:String)
+        }
     }
 
-    interface Presenter {
+    interface Presenter:IBaseContract.Presenter<View> {
 
         fun onSearchClick()
-
-
 
     }
 }
