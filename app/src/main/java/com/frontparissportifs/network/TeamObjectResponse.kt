@@ -1,5 +1,8 @@
 package com.frontparissportifs.network
 
+data class TeamResponse(val teams: List<TeamObjectResponse>)
+
+
 data class TeamObjectResponse(
     val idAPIfootball: String,
     val idLeague: String?,

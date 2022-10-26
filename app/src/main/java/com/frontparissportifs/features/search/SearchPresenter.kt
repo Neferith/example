@@ -2,8 +2,10 @@ package com.frontparissportifs.features.search
 
 import android.util.Log
 import com.frontparissportifs.model.Team
+import javax.inject.Inject
 
-open class SearchPresenter:ISearchContract.Presenter, ISearchContract.Model.OnFinishedListener<List<Team>> {
+open class SearchPresenter @Inject constructor() : ISearchContract.Presenter,
+    ISearchContract.Model.OnFinishedListener<List<Team>> {
 
     var view: ISearchContract.View? = null
     var model: ISearchContract.Model? = null

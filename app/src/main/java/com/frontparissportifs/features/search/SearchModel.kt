@@ -23,11 +23,11 @@ class SearchModel : ISearchContract.Model, CoroutineScope {
                 }
                 val response = ApiClient.apiService.getByLeagues(leagueName)
                 withContext(Dispatchers.Main) {
-                    val res: List<Team> = TeamMapper().mapFromEntityList(response)
+                    val res: List<Team> = TeamMapper().mapFromEntityList(response.teams)
                     onFinishedListener.success(res)
                 }
             } catch (e: Exception) {
-                //TODO : Not Implemented Yet
+                e.printStackTrace()
             }
         }
     }

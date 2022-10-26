@@ -1,8 +1,11 @@
 package com.frontparissportifs.network
 
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface TeamApi {
-    @GET
-    suspend fun getByLeagues(leagueName:String):List<TeamObjectResponse>
+
+
+    @GET("search_all_teams.php")
+    suspend fun getByLeagues(@Query("l") leagueName: String): TeamResponse
 }
