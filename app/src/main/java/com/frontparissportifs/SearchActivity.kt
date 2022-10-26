@@ -5,7 +5,6 @@ import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.frontparissportifs.features.search.ISearchContract
-import com.frontparissportifs.features.search.SearchModel
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -15,6 +14,10 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View {
 
     @Inject
     lateinit var presenter: ISearchContract.Presenter
+
+
+    @Inject
+    lateinit var model: ISearchContract.Model
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,7 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View {
             false
         })
 
-        presenter?.attach(this, SearchModel())
+        presenter?.attach(this, model)
     }
 
 

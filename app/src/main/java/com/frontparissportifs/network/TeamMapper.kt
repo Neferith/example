@@ -28,19 +28,17 @@ constructor() : EntityMapper<TeamObjectResponse, Team> {
         TODO("Not yet implemented")
     }
 
-    fun extractLeagues(entity: TeamObjectResponse): List<League> {
+    private fun extractLeagues(entity: TeamObjectResponse): List<League> {
+        val leagues: ArrayList<League> = ArrayList()
+        if (entity.idLeague != null && entity.strLeague != null) {
 
-       val  leagues:ArrayList<League> = ArrayList()
-
-        if(entity.idLeague != null && entity.strLeague != null) {
-
-            leagues.add(League(entity.idLeague,entity.strLeague))
+            leagues.add(League(entity.idLeague, entity.strLeague))
         }
-        if(entity.idLeague2 != null && entity.strLeague2 != null) {
+        if (entity.idLeague2 != null && entity.strLeague2 != null) {
 
-            leagues.add(League(entity.idLeague2,entity.strLeague2))
+            leagues.add(League(entity.idLeague2, entity.strLeague2))
         }
-        if(entity.idLeague3 != null && entity.strLeague3 != null) {
+        if (entity.idLeague3 != null && entity.strLeague3 != null) {
 
             leagues.add(League(entity.idLeague3,entity.strLeague3))
         }
@@ -60,7 +58,6 @@ constructor() : EntityMapper<TeamObjectResponse, Team> {
 
             leagues.add(League(entity.idLeague7,entity.strLeague7))
         }
-
         return leagues
     }
 

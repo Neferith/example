@@ -4,18 +4,21 @@ import com.frontparissportifs.model.Team
 import com.frontparissportifs.network.ApiClient
 import com.frontparissportifs.network.TeamMapper
 import kotlinx.coroutines.*
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class SearchModel : ISearchContract.Model, CoroutineScope {
+class SearchModel @Inject constructor() : ISearchContract.Model, CoroutineScope {
 
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
+
+    @Inject
+    lateinit var teamMapper: TeamMapper
 
     override fun searchTeams(
         leagueName: String?,
         onFinishedListener: ISearchContract.Model.OnFinishedListener<List<Team>>
     ) {
-
         launch {
             try {
                 if (leagueName == null) {
@@ -23,7 +26,7 @@ class SearchModel : ISearchContract.Model, CoroutineScope {
                 }
                 val response = ApiClient.apiService.getByLeagues(leagueName)
                 withContext(Dispatchers.Main) {
-                    val res: List<Team> = TeamMapper().mapFromEntityList(response.teams)
+                    val res: List<Team> = teamMapper.mapFromEntityList(response.teams)
                     onFinishedListener.success(res)
                 }
             } catch (e: Exception) {

@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
+
     private const val BASE_URL: String = "https://www.thesportsdb.com/api/v1/json/2/"
 
     private val gson : Gson by lazy {
@@ -28,4 +29,5 @@ object ApiClient {
     val apiService :  TeamApi by lazy{
         retrofit.create(TeamApi::class.java)
     }
+
 }

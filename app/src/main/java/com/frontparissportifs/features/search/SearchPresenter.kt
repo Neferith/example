@@ -25,7 +25,6 @@ open class SearchPresenter @Inject constructor() : ISearchContract.Presenter,
         model?.searchTeams(searchValue, this)
     }
 
-
     override fun success(result:List<Team>) {
         Log.d("test","test")
     }
