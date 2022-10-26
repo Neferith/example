@@ -67,4 +67,5 @@ data class TeamObjectResponse(
     val strTwitter: String,
     val strWebsite: String,
     val strYoutube: String
+
 )

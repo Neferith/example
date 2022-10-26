@@ -4,5 +4,5 @@ import retrofit2.http.GET
 
 interface TeamApi {
     @GET
-    suspend fun getByLeagues():List<TeamObjectResponse>
+    suspend fun getByLeagues(leagueName:String):List<TeamObjectResponse>
 }

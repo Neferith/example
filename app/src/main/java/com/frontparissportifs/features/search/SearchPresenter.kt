@@ -1,6 +1,9 @@
 package com.frontparissportifs.features.search
 
-open class SearchPresenter:ISearchContract.Presenter {
+import android.util.Log
+import com.frontparissportifs.model.Team
+
+open class SearchPresenter:ISearchContract.Presenter, ISearchContract.Model.OnFinishedListener<List<Team>> {
 
     var view: ISearchContract.View? = null
     var model: ISearchContract.Model? = null
@@ -17,7 +20,14 @@ open class SearchPresenter:ISearchContract.Presenter {
 
     override fun onSearchClick() {
         val searchValue = view?.getSearchValue()
-        model?.searchTeams(searchValue)
+        model?.searchTeams(searchValue, this)
     }
+
+
+    override fun success(result:List<Team>) {
+        Log.d("test","test")
+    }
+
+    override fun onFailure(codeError:String , message:String) {}
 
 }

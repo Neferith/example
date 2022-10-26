@@ -20,6 +20,10 @@ constructor() : EntityMapper<TeamObjectResponse, Team> {
         )
     }
 
+    fun mapFromEntityList(entities: List<TeamObjectResponse>): List<Team> {
+        return entities.map { mapFromEntity(it) }
+    }
+
     override fun mapToEntity(domainModel: Team): TeamObjectResponse {
         TODO("Not yet implemented")
     }
