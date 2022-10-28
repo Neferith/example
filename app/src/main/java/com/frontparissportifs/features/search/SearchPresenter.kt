@@ -1,13 +1,8 @@
 package com.frontparissportifs.features.search
 
-import android.util.Log
-import com.frontparissportifs.model.Team
-import com.frontparissportifs.repository.TeamRepository
-import java.util.Observer
 import javax.inject.Inject
 
-open class SearchPresenter @Inject constructor() : ISearchContract.Presenter,
-    ISearchContract.Model.OnFinishedListener<List<Team>> {
+open class SearchPresenter @Inject constructor() : ISearchContract.Presenter {
 
     var view: ISearchContract.View? = null
     var model: ISearchContract.Model? = null
@@ -24,18 +19,7 @@ open class SearchPresenter @Inject constructor() : ISearchContract.Presenter,
 
     override fun onSearchClick() {
         val searchValue = view?.getSearchValue()
-        model?.searchTeams(searchValue, this)
+        model?.searchTeams(searchValue)
     }
-
-    override fun success(result:List<Team>) {
-        Log.d("test","test")
-    }
-
-    override fun onFailure(codeError:String , message:String) {}
-
-
-
-
-
 
 }

@@ -1,7 +1,6 @@
 package com.frontparissportifs
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
@@ -14,17 +13,13 @@ import com.frontparissportifs.utils.DataState
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.TeamItemListener {
 
     @Inject
     lateinit var presenter: ISearchContract.Presenter
-
-
 
     @Inject
     lateinit var model: ISearchContract.Model

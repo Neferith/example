@@ -21,9 +21,7 @@ class SearchModel @Inject constructor(
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
-
     private val _dataState: MutableLiveData<DataState<List<Team>>> = MutableLiveData()
-
     override val dataState: LiveData<DataState<List<Team>>>
         get() = _dataState
 
@@ -43,45 +41,13 @@ class SearchModel @Inject constructor(
     }
 
     override fun searchTeams(
-        leagueName: String?,
-        onFinishedListener: ISearchContract.Model.OnFinishedListener<List<Team>>
+        leagueName: String?
     ) {
         launch {
-
                     teamRepository.getByLeagues(leagueName).onEach { dataState -> _dataState.value = dataState  }
                         .launchIn(MainScope())
-
-
-
         }
     }
-
-    /* private val job = Job()
-     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
-
-     @Inject
-     lateinit var teamMapper: TeamMapper
-
-     override fun searchTeams(
-         leagueName: String?,
-         onFinishedListener: ISearchContract.Model.OnFinishedListener<List<Team>>
-     ) {
-         launch {
-             try {
-                 if (leagueName == null) {
-                     throw ParameterException("League name is null")
-                 }
-                 val response = teamRepository.getByLeagues(leagueName)//ApiClient.apiService.getByLeagues(leagueName)
-                 withContext(Dispatchers.Main) {
-
-                     onFinishedListener.success(response)
-                 }
-             } catch (e: Exception) {
-                 e.printStackTrace()
-             }
-         }
-     }*/
-
 }
 
 sealed class MainStateEvent {

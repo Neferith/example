@@ -11,11 +11,8 @@ interface ISearchContract:IBaseContract {
     }
 
     interface Model:IBaseContract.Model {
-        fun searchTeams(leagueName:String?, onFinishedListener: OnFinishedListener<List<Team>>)
-        interface OnFinishedListener<T> {
-            fun success(result:T)
-            fun onFailure(codeError:String , message:String)
-        }
+        fun searchTeams(leagueName:String?)
+
         val dataState: LiveData<DataState<List<Team>>>
     }
 
