@@ -2,6 +2,8 @@ package com.frontparissportifs.features.search
 
 import android.util.Log
 import com.frontparissportifs.model.Team
+import com.frontparissportifs.repository.TeamRepository
+import java.util.Observer
 import javax.inject.Inject
 
 open class SearchPresenter @Inject constructor() : ISearchContract.Presenter,
@@ -30,5 +32,10 @@ open class SearchPresenter @Inject constructor() : ISearchContract.Presenter,
     }
 
     override fun onFailure(codeError:String , message:String) {}
+
+
+
+
+
 
 }
