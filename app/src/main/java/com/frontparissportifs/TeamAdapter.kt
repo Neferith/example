@@ -14,7 +14,7 @@ import javax.inject.Inject
 class TeamAdapter(private val listener: TeamItemListener) : RecyclerView.Adapter<TeamViewHolder>() {
 
     interface TeamItemListener {
-        fun onClickedBlog(blogTitle: CharSequence)
+        fun onClickedTeam(teamTitle: CharSequence)
     }
 
     private val items = ArrayList<Team>()
@@ -54,6 +54,6 @@ class TeamViewHolder(itemView: View, private val listener: TeamAdapter.TeamItemL
     }
 
     override fun onClick(v: View?) {
-        listener.onClickedBlog(textTitle.text)
+        listener.onClickedTeam(textTitle.text)
     }
 }

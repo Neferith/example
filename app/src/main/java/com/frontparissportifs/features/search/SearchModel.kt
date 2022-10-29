@@ -2,10 +2,7 @@ package com.frontparissportifs.features.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.frontparissportifs.model.Team
-import com.frontparissportifs.network.TeamApi
-import com.frontparissportifs.network.TeamMapper
 import com.frontparissportifs.repository.TeamRepository
 import com.frontparissportifs.utils.DataState
 import kotlinx.coroutines.*
@@ -25,20 +22,6 @@ class SearchModel @Inject constructor(
     override val dataState: LiveData<DataState<List<Team>>>
         get() = _dataState
 
-    fun setStateEvent(mainStateEvent: MainStateEvent) {
-        launch {
-            when (mainStateEvent) {
-                is MainStateEvent.GetTeamEvents -> {
-                    teamRepository.getByLeagues("").onEach { dataState -> _dataState.value = dataState  }
-                        .launchIn(this)
-                }
-
-                is MainStateEvent.None -> {
-                    // No action
-                }
-            }
-        }
-    }
 
     override fun searchTeams(
         leagueName: String?
@@ -50,7 +33,3 @@ class SearchModel @Inject constructor(
     }
 }
 
-sealed class MainStateEvent {
-    object GetTeamEvents : MainStateEvent()
-    object None : MainStateEvent()
-}

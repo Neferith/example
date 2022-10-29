@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.frontparissportifs.features.search.ISearchContract
 import com.frontparissportifs.model.Team
+import com.frontparissportifs.ui.leagues.AutocompleteLeaguesFragment
+import com.frontparissportifs.ui.main.MainFragment
 import com.frontparissportifs.utils.DataState
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +31,12 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, AutocompleteLeaguesFragment.newInstance())
+                .commitNow()
+        }
+
         setupRecyclerView()
 
         var search = findViewById<TextInputLayout>(R.id.search)
@@ -45,6 +53,9 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
         subscribeObservers()
         presenter?.attach(this, model)
     }
+
+
+
 
 
     override fun onDestroy() {
@@ -83,8 +94,8 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
 
     }
 
-    private fun populateRecyclerView(blogs: List<Team>) {
-        if (blogs.isNotEmpty()) adapter.setItems(ArrayList(blogs))
+    private fun populateRecyclerView(teams: List<Team>) {
+        if (teams.isNotEmpty()) adapter.setItems(ArrayList(teams))
     }
 
     private fun displayError(message: String?) {
@@ -105,7 +116,7 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
         return "English Premier League"
     }
 
-    override fun onClickedBlog(blogTitle: CharSequence) {
+    override fun onClickedTeam(teamTitle: CharSequence) {
         TODO("Not yet implemented")
     }
 }

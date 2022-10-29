@@ -1,4 +1,4 @@
-package com.frontparissportifs.network
+package com.frontparissportifs.network.team
 
 import retrofit2.http.GET
 import retrofit2.http.Query

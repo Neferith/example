@@ -1,6 +1,6 @@
 package com.frontparissportifs.di
 
-import com.frontparissportifs.network.TeamApi
+import com.frontparissportifs.network.team.TeamApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -39,7 +39,7 @@ object ApiClient {
 
     @Singleton
     @Provides
-    fun provideBlogService(retrofit: Retrofit.Builder): TeamApi {
+    fun provideTeamService(retrofit: Retrofit.Builder): TeamApi {
         return retrofit
             .build()
             .create(TeamApi::class.java)

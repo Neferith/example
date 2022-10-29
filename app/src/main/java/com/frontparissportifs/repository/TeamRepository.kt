@@ -2,10 +2,9 @@ package com.frontparissportifs.repository
 
 import com.frontparissportifs.features.search.ParameterException
 import com.frontparissportifs.model.Team
-import com.frontparissportifs.network.TeamApi
-import com.frontparissportifs.network.TeamMapper
+import com.frontparissportifs.network.team.TeamApi
+import com.frontparissportifs.network.team.TeamMapper
 import com.frontparissportifs.utils.DataState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -19,8 +18,8 @@ constructor(private val teamApi: TeamApi, private val teamMapper: TeamMapper){
             if (leagueName == null) {
                 throw ParameterException("League name is null")
             }
-            val networkBlogs = teamApi.getByLeagues(leagueName)
-            val teams = teamMapper.mapFromEntityList(networkBlogs.teams)
+            val apiTeams = teamApi.getByLeagues(leagueName)
+            val teams = teamMapper.mapFromEntityList(apiTeams.teams)
 
             emit(DataState.Success(teams))
         } catch (e: Exception) {

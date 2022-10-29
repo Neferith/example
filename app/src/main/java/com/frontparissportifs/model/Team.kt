@@ -1,6 +1,6 @@
 package com.frontparissportifs.model
 
-class Team (
+data class Team (
     var id: String,
     val name: String,
     val banner: String?,

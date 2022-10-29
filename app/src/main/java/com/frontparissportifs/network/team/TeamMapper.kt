@@ -1,4 +1,4 @@
-package com.frontparissportifs.network
+package com.frontparissportifs.network.team
 
 import com.frontparissportifs.model.League
 import com.frontparissportifs.model.Team

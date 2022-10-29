@@ -1,6 +1,6 @@
 package com.frontparissportifs
 
-import com.frontparissportifs.network.TeamObjectResponse
+import com.frontparissportifs.network.team.TeamObjectResponse
 import com.google.gson.Gson
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.frontparissportifs.network
+package com.frontparissportifs.network.team
 
 data class TeamResponse(val teams: List<TeamObjectResponse>)
 

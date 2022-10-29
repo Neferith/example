@@ -32,7 +32,7 @@ class SearchPresenterUnitTest {
     fun test_SearchNotResult() {
 
         Mockito.`when`(presenter.model?.searchTeams("Test"))
-            .then { presenter.view?.onFailure("CODE_ERREUR", "") }
+            .then {model.dataState }
 
         Mockito.`when`(view.getSearchValue()).thenReturn("Test")
 
