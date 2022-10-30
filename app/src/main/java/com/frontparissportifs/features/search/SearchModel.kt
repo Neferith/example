@@ -27,7 +27,9 @@ class SearchModel @Inject constructor(
         leagueName: String?
     ) {
         launch {
-                    teamRepository.getByLeagues(leagueName).onEach { dataState -> _dataState.value = dataState  }
+                    teamRepository.getByLeagues(leagueName).onEach {
+                            dataState -> _dataState.value = dataState
+                    }
                         .launchIn(MainScope())
         }
     }

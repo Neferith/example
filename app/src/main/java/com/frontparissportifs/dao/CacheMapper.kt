@@ -29,4 +29,8 @@ constructor() : EntityMapper<LeagueCacheEntity, League> {
         return entities.map { mapFromEntity(it) }
     }
 
+    fun mapFromEntityListToListString(entities: List<LeagueCacheEntity>): List<String> {
+        return entities.map { it.name }
+    }
+
 }

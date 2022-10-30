@@ -30,7 +30,7 @@ constructor(
 
             val convertApiLeagues = leagueMapper.mapFromEntityList(apiLeagues.leagues)
             for (league in convertApiLeagues) {
-                if(league.sport.equals("soccer")) {
+                if(league.sport.equals("Soccer")) {
                     leagueDao.insert(cacheMapper.mapToEntity(league))
                 }
             }
@@ -47,9 +47,27 @@ constructor(
             if (keyword == null) {
                 throw ParameterException("keyword is null")
             }
-            val cacheLeagues = leagueDao.get(keyword)
+            val cacheLeagues = leagueDao.getByKeyword(keyword)
 
             val leagues = cacheMapper.mapFromEntityList(cacheLeagues)
+
+            emit(DataState.Success(leagues))
+        } catch (e: Exception) {
+            emit(DataState.Error(e))
+        }
+    }
+
+
+    suspend fun foundAllSoccerLeagues(): Flow<DataState<List<String>>> = flow {
+       // emit(DataState.Loading)
+
+        initializeDatabaseIfNeed()
+
+        try {
+
+            val cacheLeagues = leagueDao.getAll()
+
+            val leagues = cacheMapper.mapFromEntityListToListString(cacheLeagues)
 
             emit(DataState.Success(leagues))
         } catch (e: Exception) {

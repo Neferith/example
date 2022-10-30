@@ -1,5 +1,6 @@
 package com.frontparissportifs.di
 
+import com.frontparissportifs.network.LeagueApi
 import com.frontparissportifs.network.team.TeamApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -43,5 +44,13 @@ object ApiClient {
         return retrofit
             .build()
             .create(TeamApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLeagueService(retrofit: Retrofit.Builder): LeagueApi {
+        return retrofit
+            .build()
+            .create(LeagueApi::class.java)
     }
 }

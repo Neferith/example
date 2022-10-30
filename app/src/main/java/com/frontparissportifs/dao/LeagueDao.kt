@@ -12,5 +12,9 @@ interface LeagueDao {
     suspend fun insert(teamEntity: LeagueCacheEntity): Long
 
     @Query("SELECT * FROM leagues WHERE name LIKE :keyword")
-    suspend fun get(keyword:String): List<LeagueCacheEntity>
+    suspend fun getByKeyword(keyword:String): List<LeagueCacheEntity>
+
+
+    @Query("SELECT * FROM leagues")
+    suspend fun getAll(): List<LeagueCacheEntity>
 }

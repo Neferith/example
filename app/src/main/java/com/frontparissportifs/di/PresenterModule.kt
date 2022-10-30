@@ -3,6 +3,9 @@ package com.frontparissportifs.di
 import com.frontparissportifs.features.search.ISearchContract
 import com.frontparissportifs.features.search.SearchModel
 import com.frontparissportifs.features.search.SearchPresenter
+import com.frontparissportifs.ui.leagues.AutocompleteLeaguesModel
+import com.frontparissportifs.ui.leagues.AutocompleteLeaguesModelPresenter
+import com.frontparissportifs.ui.leagues.IAutocompleteLeaguesContract
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,4 +19,11 @@ abstract class PresenterModule {
 
     @Binds
     abstract fun provideSearchModel(impl: SearchModel): ISearchContract.Model
+
+
+    @Binds
+    abstract fun provideAutocompletePresenter(impl: AutocompleteLeaguesModelPresenter): IAutocompleteLeaguesContract.Presenter
+
+    @Binds
+    abstract fun provideAutocompleteModel(impl: AutocompleteLeaguesModel): IAutocompleteLeaguesContract.Model
 }

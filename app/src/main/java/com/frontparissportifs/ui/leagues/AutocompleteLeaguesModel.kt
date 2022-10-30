@@ -21,17 +21,23 @@ class AutocompleteLeaguesModel @Inject constructor(
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
-    private val _dataState: MutableLiveData<DataState<List<League>>> = MutableLiveData()
-    override val dataState: LiveData<DataState<List<League>>>
-        get() = _dataState
+
 
 
     override fun autocompleteLeagues(
         keyword: String?
     ) {
+       // TODO : Not Implemented yet
+    }
+
+    override fun allSoccerLeagues(onFinishedListener: IAutocompleteLeaguesContract.Model.OnFinishedListener) {
         launch {
-            leagueRepository.autocompleteKeywords(keyword).onEach { dataState -> _dataState.value = dataState  }
-                .launchIn(MainScope())
+            leagueRepository.foundAllSoccerLeagues().onEach { dataState ->
+                println(dataState)
+
+
+                onFinishedListener.onFinished(dataState)
+            }.launchIn(MainScope())
         }
     }
 }
