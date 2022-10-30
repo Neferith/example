@@ -3,9 +3,9 @@ package com.frontparissportifs.di
 import com.frontparissportifs.features.search.ISearchContract
 import com.frontparissportifs.features.search.SearchModel
 import com.frontparissportifs.features.search.SearchPresenter
-import com.frontparissportifs.ui.leagues.AutocompleteLeaguesModel
-import com.frontparissportifs.ui.leagues.AutocompleteLeaguesModelPresenter
-import com.frontparissportifs.ui.leagues.IAutocompleteLeaguesContract
+import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesModel
+import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesModelPresenter
+import com.frontparissportifs.ui.autocomplete.IAutocompleteLeaguesContract
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

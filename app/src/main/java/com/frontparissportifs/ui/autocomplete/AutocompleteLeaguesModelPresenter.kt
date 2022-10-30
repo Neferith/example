@@ -1,36 +1,28 @@
-package com.frontparissportifs.ui.leagues
+package com.frontparissportifs.ui.autocomplete
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.frontparissportifs.features.search.ISearchContract
-import com.frontparissportifs.ui.base.BasePresenter
 import com.frontparissportifs.utils.DataState
 import javax.inject.Inject
 
-open class AutocompleteLeaguesModelPresenter @Inject constructor() : IAutocompleteLeaguesContract.Presenter,
+open class AutocompleteLeaguesModelPresenter @Inject constructor(
+    val model:IAutocompleteLeaguesContract.Model
+    ) : IAutocompleteLeaguesContract.Presenter,
     IAutocompleteLeaguesContract.Model.OnFinishedListener {
 
-
     var view: IAutocompleteLeaguesContract.View? = null
-    var model: IAutocompleteLeaguesContract.Model? = null
 
     private val _dataState: MutableLiveData<DataState<List<String>>> = MutableLiveData()
     override val dataState: LiveData<DataState<List<String>>>
         get() = _dataState
 
-
-
-    override fun onEnterChar() {
-        TODO("Not yet implemented")
+    override fun onChooseItemInAutocompleteList(item: String) {
+        view?.updateCurrentKeywordSelected(item)
     }
 
-    override fun onChooseLeagues() {
-        TODO("Not yet implemented")
-    }
 
     override fun detach() {
         this.view = null
-        this.model = null
     }
 
     override fun attach(
@@ -38,13 +30,11 @@ open class AutocompleteLeaguesModelPresenter @Inject constructor() : IAutocomple
         model: IAutocompleteLeaguesContract.Model
     ) {
         this.view = view
-        this.model = model
         this.model?.allSoccerLeagues(this)
     }
 
     override fun onFinished(string: DataState<List<String>>) {
         _dataState.value = string
     }
-
 
 }

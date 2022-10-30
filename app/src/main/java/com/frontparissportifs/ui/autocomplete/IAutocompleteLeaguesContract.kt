@@ -1,4 +1,4 @@
-package com.frontparissportifs.ui.leagues
+package com.frontparissportifs.ui.autocomplete
 
 import androidx.lifecycle.LiveData
 import com.frontparissportifs.features.search.IBaseContract
@@ -7,7 +7,8 @@ import com.frontparissportifs.utils.DataState
 interface IAutocompleteLeaguesContract : IBaseContract {
 
     interface View: IBaseContract.View  {
-        fun getSearchValue():String
+
+        fun updateCurrentKeywordSelected(keyword:String)
     }
 
     interface Model: IBaseContract.Model {
@@ -26,10 +27,10 @@ interface IAutocompleteLeaguesContract : IBaseContract {
     }
 
     interface Presenter: IBaseContract.Presenter<View, Model>{
-        fun onEnterChar()
-        fun onChooseLeagues()
 
         val dataState: LiveData<DataState<List<String>>>
+
+        fun onChooseItemInAutocompleteList(item:String)
     }
 
 }

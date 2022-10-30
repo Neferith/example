@@ -26,6 +26,7 @@ class SearchModel @Inject constructor(
     override fun searchTeams(
         leagueName: String?
     ) {
+
         launch {
                     teamRepository.getByLeagues(leagueName).onEach {
                             dataState -> _dataState.value = dataState

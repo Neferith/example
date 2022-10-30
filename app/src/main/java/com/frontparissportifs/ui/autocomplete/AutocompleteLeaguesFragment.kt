@@ -1,4 +1,4 @@
-package com.frontparissportifs.ui.leagues
+package com.frontparissportifs.ui.autocomplete
 
 import android.content.Context
 import android.graphics.Color
@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
-import android.widget.ListAdapter
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
+import androidx.fragment.app.FragmentResultOwner
+import androidx.lifecycle.LifecycleOwner
 import com.frontparissportifs.R
-import com.frontparissportifs.model.League
 import com.frontparissportifs.utils.DataState
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +45,6 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
         }
     }
 
-    lateinit var adapter: ArrayAdapter<String>
     lateinit var autoCompleteTextView: MaterialAutoCompleteTextView
 
     override fun onCreateView(
@@ -55,7 +56,7 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
 
         //Creating the instance of ArrayAdapter containing list of fruit names
         //Creating the instance of ArrayAdapter containing list of fruit names
-         adapter=
+         val adapter=
             ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_item, emptyArray())
         //Getting the instance of AutoCompleteTextView
         //Getting the instance of AutoCompleteTextView
@@ -63,11 +64,16 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
         val atv = view.findViewById<MaterialAutoCompleteTextView>(R.id.autoCompleteTextView)
         autoCompleteTextView = atv
 
+
         atv.threshold = 1 //will start working from first character
 
         atv.setAdapter(adapter) //setting the adapter data into the AutoCompleteTextView
 
         atv.setTextColor(Color.RED)
+        atv.setOnItemClickListener { parent, view, position, id ->
+            presenter.onChooseItemInAutocompleteList(parent.adapter.getItem(position) as String)
+        }
+
 
         return view
     }
@@ -78,7 +84,10 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
         subscribeObservers()
     }
 
+
+
     override fun onDetach() {
+        unsubscribeObservers()
         presenter.detach()
         super.onDetach()
     }
@@ -89,17 +98,20 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
 
     }
 
+    private fun unsubscribeObservers() {
+
+        presenter.dataState.removeObservers(this)
+
+    }
+
     private fun processResponse(response: DataState<List<String>>) {
 
         when(response) {
             is DataState.Success<List<String>> -> {
-
-
-                val leagues = arrayOf(response.data)
-
-                adapter=
+                val adapter=
                     ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_item, response.data.toTypedArray())
                 autoCompleteTextView.setAdapter(adapter)
+
 
             }
             is DataState.Loading -> {
@@ -110,29 +122,13 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
                 //displayError(response.exception.message)
             }
         }
+    }
+
+    override fun updateCurrentKeywordSelected(keyword: String) {
+        parentFragmentManager.setFragmentResult("requestKeyword", bundleOf("bundleKeyword" to keyword))
 
     }
 
 
 
-    lateinit var mCallback: TextClickedListener
-
-    //defining Interface
-    interface TextClickedListener {
-        fun sendText(text: String)
-    }
-
-    fun setOnTextClickedListener(callback: TextClickedListener) {
-        this.mCallback = callback
-    }
-
-    // TODO: Rename and change types and number of parameters
-    fun yourMethodofSendingText() {
-        //here you can get the text from the edit text or can use this method according to your need
-        mCallback.sendText("YOUR TEXT")
-    }
-
-    override fun getSearchValue(): String {
-        TODO("Not yet implemented")
-    }
 }

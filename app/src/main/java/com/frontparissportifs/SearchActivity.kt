@@ -9,8 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.frontparissportifs.features.search.ISearchContract
 import com.frontparissportifs.model.Team
-import com.frontparissportifs.ui.leagues.AutocompleteLeaguesFragment
-import com.frontparissportifs.ui.main.MainFragment
+import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesFragment
 import com.frontparissportifs.utils.DataState
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +34,11 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, AutocompleteLeaguesFragment.newInstance())
                 .commitNow()
+        }
+
+        supportFragmentManager.setFragmentResultListener("requestKeyword",this) { requestKey, bundle ->
+            testsearchValue = bundle.getString("bundleKeyword").toString()
+            presenter.onSearchClick()
         }
 
         setupRecyclerView()
@@ -85,6 +89,7 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
             }
             is DataState.Loading -> {
                 displayLoading(true)
+                populateRecyclerView(ArrayList())
             }
             is DataState.Error -> {
                 displayLoading(false)
@@ -95,7 +100,7 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
     }
 
     private fun populateRecyclerView(teams: List<Team>) {
-        if (teams.isNotEmpty()) adapter.setItems(ArrayList(teams))
+        adapter.setItems(ArrayList(teams))
     }
 
     private fun displayError(message: String?) {
@@ -112,8 +117,9 @@ class SearchActivity : AppCompatActivity(), ISearchContract.View, TeamAdapter.Te
 
 
 
+    var testsearchValue = ""
     override fun getSearchValue(): String {
-        return "English Premier League"
+        return testsearchValue
     }
 
     override fun onClickedTeam(teamTitle: CharSequence) {
