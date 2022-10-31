@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.frontparissportifs.R
 import com.frontparissportifs.TeamAdapter
 import com.frontparissportifs.model.Team
+import com.frontparissportifs.ui.detail.DetailFragment
 import com.frontparissportifs.utils.DataState
 import com.frontparissportifs.utils.displayError
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,6 +109,10 @@ class ResultFragment : Fragment(), IResultContract.View, TeamAdapter.TeamItemLis
 
     override fun onClickedTeam(teamTitle: CharSequence) {
         TODO("Not yet implemented")
+    }
+
+    override fun goToDetail(team: Team) {
+
     }
 
 }
