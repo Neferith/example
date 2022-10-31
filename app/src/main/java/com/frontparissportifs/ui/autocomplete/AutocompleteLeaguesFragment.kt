@@ -22,13 +22,13 @@ import javax.inject.Inject
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.View {
+class AutocompleteLeaguesFragment : Fragment(), AutocompleteLeaguesContract.View {
 
     @Inject
-    lateinit var presenter: IAutocompleteLeaguesContract.Presenter
+    lateinit var presenter: AutocompleteLeaguesContract.Presenter
 
     @Inject
-    lateinit var model: IAutocompleteLeaguesContract.Model
+    lateinit var model: AutocompleteLeaguesContract.Model
 
     companion object {
         fun newInstance() = AutocompleteLeaguesFragment()

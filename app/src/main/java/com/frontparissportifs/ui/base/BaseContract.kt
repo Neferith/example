@@ -5,7 +5,7 @@ import androidx.annotation.UiThread
 //@TODO : A remplacer
 class ParameterException(message: String?) : Exception(message)
 
-interface IBaseContract {
+interface BaseContract {
 
     @UiThread
     interface View

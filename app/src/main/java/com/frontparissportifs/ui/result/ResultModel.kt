@@ -9,13 +9,13 @@ import kotlin.coroutines.CoroutineContext
 
 class ResultModel @Inject constructor(
     private val teamRepository: TeamRepository
-) : IResultContract.Model, CoroutineScope {
+) : ResultContract.Model, CoroutineScope {
 
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
     override fun searchTeams(
-        leagueName: String?, onResultListener: IResultContract.Model.OnResultListener
+        leagueName: String?, onResultListener: ResultContract.Model.OnResultListener
     ) {
         launch {
             teamRepository.getByLeagues(leagueName).onEach {

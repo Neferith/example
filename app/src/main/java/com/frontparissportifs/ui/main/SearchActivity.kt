@@ -1,7 +1,8 @@
-package com.frontparissportifs
+package com.frontparissportifs.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.frontparissportifs.R
 import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesFragment
 import com.frontparissportifs.ui.result.ResultFragment
 import dagger.hilt.android.AndroidEntryPoint

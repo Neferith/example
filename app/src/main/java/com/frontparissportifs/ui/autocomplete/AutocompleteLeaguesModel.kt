@@ -9,12 +9,10 @@ import kotlin.coroutines.CoroutineContext
 
 class AutocompleteLeaguesModel @Inject constructor(
     private val leagueRepository: LeagueRepository
-) : IAutocompleteLeaguesContract.Model, CoroutineScope {
+) : AutocompleteLeaguesContract.Model, CoroutineScope {
 
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
-
-
 
 
     override fun autocompleteLeagues(
@@ -23,7 +21,7 @@ class AutocompleteLeaguesModel @Inject constructor(
        // TODO : Not Implemented yet
     }
 
-    override fun allSoccerLeagues(onFinishedListener: IAutocompleteLeaguesContract.Model.OnFinishedListener) {
+    override fun allSoccerLeagues(onFinishedListener: AutocompleteLeaguesContract.Model.OnFinishedListener) {
         launch {
             leagueRepository.foundAllSoccerLeagues().onEach { dataState ->
                 println(dataState)

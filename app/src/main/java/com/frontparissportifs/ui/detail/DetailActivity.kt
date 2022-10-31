@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DetailActivity : AppCompatActivity(), IDetailContract.View {
+class DetailActivity : AppCompatActivity(), DetailContract.View {
 
     @Inject
     lateinit var presenter: DetailPresenter

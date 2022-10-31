@@ -24,10 +24,10 @@ import javax.inject.Inject
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class ResultFragment : Fragment(), IResultContract.View {
+class ResultFragment : Fragment(), ResultContract.View {
 
     @Inject
-    lateinit var presenter: IResultContract.Presenter
+    lateinit var presenter: ResultContract.Presenter
 
     private lateinit var adapter: TeamAdapter
 

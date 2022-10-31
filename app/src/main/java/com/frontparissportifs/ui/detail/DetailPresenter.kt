@@ -6,10 +6,10 @@ import com.frontparissportifs.model.Team
 import javax.inject.Inject
 
 class DetailPresenter @Inject constructor(
-    val model: IDetailContract.Model
-) : IDetailContract.Presenter {
+    val model: DetailContract.Model
+) : DetailContract.Presenter {
 
-    var view: IDetailContract.View? = null
+    var view: DetailContract.View? = null
 
     private val _dataState: MutableLiveData<Team> = MutableLiveData()
     override val dataState: LiveData<Team>
@@ -19,7 +19,7 @@ class DetailPresenter @Inject constructor(
         _dataState.value = team
     }
 
-    override fun attach(view: IDetailContract.View) {
+    override fun attach(view: DetailContract.View) {
         this.view = view
     }
 

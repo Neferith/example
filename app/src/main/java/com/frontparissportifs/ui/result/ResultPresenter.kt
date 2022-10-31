@@ -7,16 +7,16 @@ import com.frontparissportifs.utils.DataState
 import javax.inject.Inject
 
 class ResultPresenter @Inject constructor(
-    val model: IResultContract.Model
-) : IResultContract.Presenter, IResultContract.Model.OnResultListener {
+    val model: ResultContract.Model
+) : ResultContract.Presenter, ResultContract.Model.OnResultListener {
 
-    var view: IResultContract.View? = null
+    var view: ResultContract.View? = null
 
     private val _dataState: MutableLiveData<DataState<List<Team>>> = MutableLiveData()
     override val dataState: LiveData<DataState<List<Team>>>
         get() = _dataState
 
-    override fun attach(view: IResultContract.View) {
+    override fun attach(view: ResultContract.View) {
         this.view = view
     }
 
