@@ -20,17 +20,15 @@ open class AutocompleteLeaguesModelPresenter @Inject constructor(
         view?.updateCurrentKeywordSelected(item)
     }
 
-
     override fun detach() {
         this.view = null
     }
 
     override fun attach(
-        view: IAutocompleteLeaguesContract.View,
-        model: IAutocompleteLeaguesContract.Model
+        view: IAutocompleteLeaguesContract.View
     ) {
         this.view = view
-        this.model?.allSoccerLeagues(this)
+        this.model.allSoccerLeagues(this)
     }
 
     override fun onFinished(string: DataState<List<String>>) {

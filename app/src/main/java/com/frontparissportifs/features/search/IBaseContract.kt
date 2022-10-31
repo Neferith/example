@@ -10,8 +10,8 @@ interface IBaseContract {
     @UiThread
     interface View
 
-    interface Presenter<V : View, M : Model> {
-        fun attach(view: V, model: M)
+    interface Presenter<V : View> {
+        fun attach(view: V)
         fun detach()
     }
 

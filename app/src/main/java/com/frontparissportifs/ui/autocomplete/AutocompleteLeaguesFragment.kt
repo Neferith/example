@@ -7,16 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
-import androidx.fragment.app.FragmentResultOwner
-import androidx.lifecycle.LifecycleOwner
 import com.frontparissportifs.R
 import com.frontparissportifs.utils.DataState
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.frontparissportifs.utils.displayError
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_autocomplete_leagues.*
 import javax.inject.Inject
 
 /**
@@ -37,54 +34,38 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
         fun newInstance() = AutocompleteLeaguesFragment()
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
-
-    lateinit var autoCompleteTextView: MaterialAutoCompleteTextView
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_autocomplete_leagues, container, false)
+        return inflater.inflate(R.layout.fragment_autocomplete_leagues, container, false)
+    }
 
-        //Creating the instance of ArrayAdapter containing list of fruit names
-        //Creating the instance of ArrayAdapter containing list of fruit names
-         val adapter=
-            ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_item, emptyArray())
-        //Getting the instance of AutoCompleteTextView
-        //Getting the instance of AutoCompleteTextView
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAutoCompleteTextView()
+    }
 
-        val atv = view.findViewById<MaterialAutoCompleteTextView>(R.id.autoCompleteTextView)
-        autoCompleteTextView = atv
-
-
-        atv.threshold = 1 //will start working from first character
-
-        atv.setAdapter(adapter) //setting the adapter data into the AutoCompleteTextView
-
-        atv.setTextColor(Color.RED)
-        atv.setOnItemClickListener { parent, view, position, id ->
+    private fun setupAutoCompleteTextView() {
+        val adapter =
+            ArrayAdapter<String>(
+                requireContext(),
+                android.R.layout.select_dialog_item,
+                emptyArray()
+            )
+        autoCompleteTextView.threshold = 1
+        autoCompleteTextView.setAdapter(adapter)
+        autoCompleteTextView.setTextColor(Color.RED)
+        autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             presenter.onChooseItemInAutocompleteList(parent.adapter.getItem(position) as String)
         }
-
-
-        return view
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        presenter.attach(this,model)
+        presenter.attach(this)
         subscribeObservers()
     }
-
-
 
     override fun onDetach() {
         unsubscribeObservers()
@@ -93,42 +74,43 @@ class AutocompleteLeaguesFragment : Fragment(), IAutocompleteLeaguesContract.Vie
     }
 
     private fun subscribeObservers() {
-
-        presenter.dataState.observe(this, { response -> response?.let { processResponse(response) } })
-
+        presenter.dataState.observe(
+            this
+        ) { response -> response?.let { processResponse(response) } }
     }
 
     private fun unsubscribeObservers() {
-
         presenter.dataState.removeObservers(this)
-
     }
 
     private fun processResponse(response: DataState<List<String>>) {
-
-        when(response) {
+        when (response) {
             is DataState.Success<List<String>> -> {
-                val adapter=
-                    ArrayAdapter<String>(requireContext(), android.R.layout.select_dialog_item, response.data.toTypedArray())
+                val adapter =
+                    ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.select_dialog_item,
+                        response.data.toTypedArray()
+                    )
                 autoCompleteTextView.setAdapter(adapter)
-
-
             }
             is DataState.Loading -> {
                 //displayLoading(true)
             }
             is DataState.Error -> {
                 //displayLoading(false)
-                //displayError(response.exception.message)
+                displayError(requireContext(), response.exception.message)
             }
         }
     }
 
     override fun updateCurrentKeywordSelected(keyword: String) {
-        parentFragmentManager.setFragmentResult("requestKeyword", bundleOf("bundleKeyword" to keyword))
-
+        requireActivity()
+            .supportFragmentManager
+            .setFragmentResult(
+                "requestKeyword",
+                bundleOf("bundleKeyword" to keyword)
+            )
     }
-
-
 
 }

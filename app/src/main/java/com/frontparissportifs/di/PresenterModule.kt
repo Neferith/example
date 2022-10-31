@@ -1,11 +1,11 @@
 package com.frontparissportifs.di
 
-import com.frontparissportifs.features.search.ISearchContract
-import com.frontparissportifs.features.search.SearchModel
-import com.frontparissportifs.features.search.SearchPresenter
 import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesModel
 import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesModelPresenter
 import com.frontparissportifs.ui.autocomplete.IAutocompleteLeaguesContract
+import com.frontparissportifs.ui.result.IResultContract
+import com.frontparissportifs.ui.result.ResultModel
+import com.frontparissportifs.ui.result.ResultPresenter
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,16 +14,21 @@ import dagger.hilt.android.components.ActivityComponent
 @Module
 @InstallIn(ActivityComponent::class)
 abstract class PresenterModule {
-    @Binds
-    abstract fun provideSearchPresenter(impl: SearchPresenter): ISearchContract.Presenter
 
     @Binds
-    abstract fun provideSearchModel(impl: SearchModel): ISearchContract.Model
-
-
-    @Binds
-    abstract fun provideAutocompletePresenter(impl: AutocompleteLeaguesModelPresenter): IAutocompleteLeaguesContract.Presenter
+    abstract fun provideAutocompletePresenter(impl: AutocompleteLeaguesModelPresenter):
+            IAutocompleteLeaguesContract.Presenter
 
     @Binds
-    abstract fun provideAutocompleteModel(impl: AutocompleteLeaguesModel): IAutocompleteLeaguesContract.Model
+    abstract fun provideAutocompleteModel(impl: AutocompleteLeaguesModel):
+            IAutocompleteLeaguesContract.Model
+
+    @Binds
+    abstract fun provideResultPresenter(impl: ResultPresenter):
+            IResultContract.Presenter
+
+    @Binds
+    abstract fun provideResultModel(impl: ResultModel):
+            IResultContract.Model
+
 }
