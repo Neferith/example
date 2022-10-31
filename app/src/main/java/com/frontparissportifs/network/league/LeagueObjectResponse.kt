@@ -1,4 +1,4 @@
-package com.frontparissportifs.network
+package com.frontparissportifs.network.league
 
 class LeagueResponse (val leagues: List<LeagueObjectResponse>)
 

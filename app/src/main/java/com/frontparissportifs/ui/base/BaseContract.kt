@@ -1,8 +1,7 @@
-package com.frontparissportifs.features.search
+package com.frontparissportifs.ui.base
 
 import androidx.annotation.UiThread
 
-//@TODO : A remplacer
 class ParameterException(message: String?) : Exception(message)
 
 interface BaseContract {

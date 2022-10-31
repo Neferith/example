@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.frontparissportifs.R
-import com.frontparissportifs.TeamAdapter
 import com.frontparissportifs.model.Team
 import com.frontparissportifs.ui.detail.DetailActivity
 import com.frontparissportifs.utils.DataState

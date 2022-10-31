@@ -1,8 +1,8 @@
 package com.frontparissportifs.ui.detail
 
 import androidx.lifecycle.LiveData
-import com.frontparissportifs.features.search.BaseContract
 import com.frontparissportifs.model.Team
+import com.frontparissportifs.ui.base.BaseContract
 
 interface DetailContract {
 

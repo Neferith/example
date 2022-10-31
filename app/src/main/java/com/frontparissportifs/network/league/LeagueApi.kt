@@ -1,6 +1,5 @@
-package com.frontparissportifs.network
+package com.frontparissportifs.network.league
 
-import com.frontparissportifs.network.team.TeamResponse
 import retrofit2.http.GET
 
 interface LeagueApi {

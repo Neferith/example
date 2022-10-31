@@ -14,19 +14,12 @@ class AutocompleteLeaguesModel @Inject constructor(
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
-
-    override fun autocompleteLeagues(
-        keyword: String?
+    override fun allSoccerLeagues(
+        onFinishedListener: AutocompleteLeaguesContract.Model.OnFinishedListener
     ) {
-       // TODO : Not Implemented yet
-    }
-
-    override fun allSoccerLeagues(onFinishedListener: AutocompleteLeaguesContract.Model.OnFinishedListener) {
         launch {
             leagueRepository.foundAllSoccerLeagues().onEach { dataState ->
                 println(dataState)
-
-
                 onFinishedListener.onFinished(dataState)
             }.launchIn(MainScope())
         }

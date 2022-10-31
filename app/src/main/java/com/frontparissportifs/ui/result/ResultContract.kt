@@ -1,9 +1,8 @@
 package com.frontparissportifs.ui.result
 
 import androidx.lifecycle.LiveData
-import com.frontparissportifs.TeamAdapter
-import com.frontparissportifs.features.search.BaseContract
 import com.frontparissportifs.model.Team
+import com.frontparissportifs.ui.base.BaseContract
 import com.frontparissportifs.utils.DataState
 
 interface ResultContract {

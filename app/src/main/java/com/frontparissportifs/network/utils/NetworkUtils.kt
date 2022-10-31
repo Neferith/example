@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
+@Suppress("DEPRECATION")
 fun hasNetwork(context: Context): Boolean {
     var result = false
     val connectivityManager =

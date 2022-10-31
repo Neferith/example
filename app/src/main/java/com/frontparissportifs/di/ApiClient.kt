@@ -1,7 +1,7 @@
 package com.frontparissportifs.di
 
 import android.content.Context
-import com.frontparissportifs.network.LeagueApi
+import com.frontparissportifs.network.league.LeagueApi
 import com.frontparissportifs.network.team.TeamApi
 import com.frontparissportifs.network.utils.hasNetwork
 import com.google.gson.Gson
@@ -56,9 +56,22 @@ object ApiClient {
         return OkHttpClient.Builder().cache(cache).addInterceptor { chain ->
             var request = chain.request()
             request = if (hasNetwork(appContext))
-                request.newBuilder().header("Cache-Control", "public, max-age=" + 60).build()
+                request
+                    .newBuilder()
+                    .header(
+                        "Cache-Control",
+                        "public, max-age=" + 60
+                    )
+                    .build()
             else
-                request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
+                request
+                    .newBuilder()
+                    .header(
+                        "Cache-Control",
+                        "public, only-if-cached, " +
+                                "max-stale=" + 60 * 60 * 24 * 7
+                    )
+                    .build()
             chain.proceed(request)
         }.build()
     }

@@ -1,8 +1,6 @@
 package com.frontparissportifs.network.league
 
-import com.frontparissportifs.dao.LeagueCacheEntity
 import com.frontparissportifs.model.League
-import com.frontparissportifs.network.LeagueObjectResponse
 import com.frontparissportifs.utils.EntityMapper
 import javax.inject.Inject
 

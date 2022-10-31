@@ -1,4 +1,4 @@
-package com.frontparissportifs
+package com.frontparissportifs.ui.result
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.frontparissportifs.R
 import com.frontparissportifs.model.Team
 import kotlinx.android.synthetic.main.item_team.view.*
 
@@ -21,7 +22,6 @@ class TeamAdapter(private val listener: TeamItemListener) : RecyclerView.Adapter
     fun setItems(items: ArrayList<Team>) {
         this.items.clear()
         this.items.addAll(items)
-
         notifyDataSetChanged()
     }
 
@@ -44,7 +44,7 @@ class TeamViewHolder(itemView: View, private val listener: TeamAdapter.TeamItemL
     RecyclerView.ViewHolder(itemView),
     View.OnClickListener {
 
-    val itemLayout: ConstraintLayout = itemView.team_layout
+    private val itemLayout: ConstraintLayout = itemView.team_layout
     var team: Team? = null
     val textTitle: TextView = itemView.text_title
     val textDescription: TextView = itemView.text_description
