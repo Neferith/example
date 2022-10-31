@@ -15,11 +15,11 @@ class ResultModel @Inject constructor(
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
     override fun searchTeams(
-        leagueName: String?,onFinishedListener: IResultContract.Model.OnFinishedListener
+        leagueName: String?, onResultListener: IResultContract.Model.OnResultListener
     ) {
         launch {
             teamRepository.getByLeagues(leagueName).onEach {
-                onFinishedListener.onFinished(it)
+                onResultListener.onReceivedResult(it)
             }
                 .launchIn(MainScope())
         }

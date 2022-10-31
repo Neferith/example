@@ -1,10 +1,10 @@
 package com.frontparissportifs.ui.result
 
 import androidx.lifecycle.LiveData
+import com.frontparissportifs.TeamAdapter
 import com.frontparissportifs.features.search.IBaseContract
 import com.frontparissportifs.model.Team
 import com.frontparissportifs.utils.DataState
-import java.text.FieldPosition
 
 interface IResultContract {
 
@@ -13,15 +13,14 @@ interface IResultContract {
     }
 
     interface Model: IBaseContract.Model {
-        fun searchTeams(leagueName:String?,onFinishedListener:OnFinishedListener)
-        interface OnFinishedListener {
-            fun onFinished(string: DataState<List<Team>>)
+        fun searchTeams(leagueName: String?, onResultListener: OnResultListener)
+        interface OnResultListener {
+            fun onReceivedResult(string: DataState<List<Team>>)
         }
     }
 
-    interface Presenter: IBaseContract.Presenter<View>{
-        fun onUserSelectKeyword(keyword:String)
-        fun onClickItem(position: Int, team: Team)
+    interface Presenter : IBaseContract.Presenter<View>, TeamAdapter.TeamItemListener {
+        fun onUserSelectKeyword(keyword: String)
         val dataState: LiveData<DataState<List<Team>>>
     }
 

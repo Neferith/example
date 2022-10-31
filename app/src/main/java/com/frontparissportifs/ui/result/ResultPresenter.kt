@@ -6,9 +6,9 @@ import com.frontparissportifs.model.Team
 import com.frontparissportifs.utils.DataState
 import javax.inject.Inject
 
-class ResultPresenter  @Inject constructor(
+class ResultPresenter @Inject constructor(
     val model: IResultContract.Model
-    ) : IResultContract.Presenter, IResultContract.Model.OnFinishedListener {
+) : IResultContract.Presenter, IResultContract.Model.OnResultListener {
 
     var view: IResultContract.View? = null
 
@@ -24,16 +24,15 @@ class ResultPresenter  @Inject constructor(
         this.view = null
     }
 
-    override fun onUserSelectKeyword(keyword:String) {
+    override fun onClickedTeam(team: Team) {
+        view?.goToDetail(team)
+    }
 
+    override fun onUserSelectKeyword(keyword: String) {
         model.searchTeams(keyword, this)
     }
 
-    override fun onClickItem(position: Int, team: Team) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onFinished(string: DataState<List<Team>>) {
+    override fun onReceivedResult(string: DataState<List<Team>>) {
         _dataState.value = string
     }
 

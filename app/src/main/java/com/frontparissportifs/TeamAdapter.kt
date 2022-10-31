@@ -9,12 +9,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.frontparissportifs.model.Team
 import kotlinx.android.synthetic.main.item_team.view.*
-import javax.inject.Inject
 
 class TeamAdapter(private val listener: TeamItemListener) : RecyclerView.Adapter<TeamViewHolder>() {
 
     interface TeamItemListener {
-        fun onClickedTeam(teamTitle: CharSequence)
+        fun onClickedTeam(team: Team)
     }
 
     private val items = ArrayList<Team>()
@@ -35,6 +34,7 @@ class TeamAdapter(private val listener: TeamItemListener) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val team = items[position]
+        holder.team = team
         holder.textTitle.text = team.name
         holder.textDescription.text = team.description
     }
@@ -45,6 +45,7 @@ class TeamViewHolder(itemView: View, private val listener: TeamAdapter.TeamItemL
     View.OnClickListener {
 
     val itemLayout: ConstraintLayout = itemView.team_layout
+    var team: Team? = null
     val textTitle: TextView = itemView.text_title
     val textDescription: TextView = itemView.text_description
     val image: AppCompatImageView = itemView.image
@@ -54,6 +55,6 @@ class TeamViewHolder(itemView: View, private val listener: TeamAdapter.TeamItemL
     }
 
     override fun onClick(v: View?) {
-        listener.onClickedTeam(textTitle.text)
+        team.let { if (it != null) listener.onClickedTeam(it) }
     }
 }

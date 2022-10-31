@@ -1,6 +1,7 @@
 package com.frontparissportifs.ui.result
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.frontparissportifs.R
 import com.frontparissportifs.TeamAdapter
 import com.frontparissportifs.model.Team
-import com.frontparissportifs.ui.detail.DetailFragment
+import com.frontparissportifs.ui.detail.DetailActivity
 import com.frontparissportifs.utils.DataState
 import com.frontparissportifs.utils.displayError
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +24,7 @@ import javax.inject.Inject
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class ResultFragment : Fragment(), IResultContract.View, TeamAdapter.TeamItemListener {
+class ResultFragment : Fragment(), IResultContract.View {
 
     @Inject
     lateinit var presenter: IResultContract.Presenter
@@ -46,7 +47,7 @@ class ResultFragment : Fragment(), IResultContract.View, TeamAdapter.TeamItemLis
             .setFragmentResultListener(
                 "requestKeyword",
                 this
-            ) { requestKey, bundle ->
+            ) { _, bundle ->
                 presenter.onUserSelectKeyword(bundle.getString("bundleKeyword").toString())
             }
     }
@@ -68,8 +69,9 @@ class ResultFragment : Fragment(), IResultContract.View, TeamAdapter.TeamItemLis
     }
 
     private fun subscribeObservers() {
-        presenter.dataState.observe(this,
-            { response -> response?.let { processResponse(response) } })
+        presenter.dataState.observe(this) { response ->
+            response?.let { processResponse(response) }
+        }
     }
 
     private fun unsubscribeObservers() {
@@ -77,7 +79,7 @@ class ResultFragment : Fragment(), IResultContract.View, TeamAdapter.TeamItemLis
     }
 
     private fun setupRecyclerView() {
-        adapter = TeamAdapter(this)
+        adapter = TeamAdapter(presenter)
         team_recyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
         team_recyclerview.adapter = adapter
     }
@@ -104,15 +106,13 @@ class ResultFragment : Fragment(), IResultContract.View, TeamAdapter.TeamItemLis
     }
 
     private fun displayLoading(isLoading: Boolean) {
-        //swipeRefreshLayout.isRefreshing = isLoading
-    }
-
-    override fun onClickedTeam(teamTitle: CharSequence) {
-        TODO("Not yet implemented")
+        swipeContainer.isRefreshing = isLoading
     }
 
     override fun goToDetail(team: Team) {
-
+        val i = Intent(requireActivity(), DetailActivity::class.java)
+        i.putExtra("team", team)
+        startActivity(i)
     }
 
 }
