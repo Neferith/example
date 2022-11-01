@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Resources
 import android.widget.Toast
 
-
 fun displayError(context: Context, message: String?) {
     if (message.isNullOrEmpty()) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
@@ -13,7 +12,5 @@ fun displayError(context: Context, message: String?) {
     }
 }
 
-val Int.dp: Int
-    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
 val Int.px: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()

@@ -14,6 +14,9 @@ interface LeagueDao {
     @Query("SELECT * FROM leagues WHERE name LIKE :keyword")
     suspend fun getByKeyword(keyword:String): List<LeagueCacheEntity>
 
+    @Query("SELECT * FROM leagues WHERE name == :keyword COLLATE NOCASE")
+    suspend fun getByKeywordEqual(keyword:String): List<LeagueCacheEntity>
+
 
     @Query("SELECT * FROM leagues")
     suspend fun getAll(): List<LeagueCacheEntity>

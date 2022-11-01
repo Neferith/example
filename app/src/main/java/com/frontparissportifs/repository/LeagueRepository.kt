@@ -56,21 +56,33 @@ constructor(
 
 
     suspend fun foundAllSoccerLeagues(): Flow<DataState<List<String>>> = flow {
-       // emit(DataState.Loading)
-
         initializeDatabaseIfNeed()
-
         try {
-
             val cacheLeagues = leagueDao.getAll()
-
             val leagues = cacheMapper.mapFromEntityListToListString(cacheLeagues)
-
             emit(DataState.Success(leagues))
         } catch (e: Exception) {
             emit(DataState.Error(e))
         }
     }
+
+    suspend fun fetchIsLeagueExist(leagueName:String): Flow<DataState<Boolean>> = flow {
+        initializeDatabaseIfNeed()
+        try {
+
+            val leagues = leagueDao.getByKeywordEqual(leagueName)
+            if(!leagues.isEmpty()) {
+                emit(DataState.Success(true))
+            } else {
+                emit(DataState.Success(false))
+            }
+
+
+        } catch (e: Exception) {
+            emit(DataState.Error(e))
+        }
+    }
+
 
 
 }

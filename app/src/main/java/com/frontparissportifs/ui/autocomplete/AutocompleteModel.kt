@@ -15,10 +15,21 @@ class AutocompleteModel @Inject constructor(
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
     override fun allSoccerLeagues(
-        onFinishedListener: AutocompleteContract.Model.OnFinishedListener
+        onFinishedListener: AutocompleteContract.Model.OnFinishedListener<List<String>>
     ) {
         launch {
             leagueRepository.foundAllSoccerLeagues().onEach { dataState ->
+                println(dataState)
+                onFinishedListener.onFinished(dataState)
+            }.launchIn(MainScope())
+        }
+    }
+
+    override fun fetchLeagueExist(leagueName:String,
+        onFinishedListener: AutocompleteContract.Model.OnFinishedListener<Boolean>
+    ) {
+        launch {
+            leagueRepository.fetchIsLeagueExist(leagueName).onEach { dataState ->
                 println(dataState)
                 onFinishedListener.onFinished(dataState)
             }.launchIn(MainScope())

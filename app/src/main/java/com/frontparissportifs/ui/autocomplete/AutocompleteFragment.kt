@@ -1,11 +1,15 @@
 package com.frontparissportifs.ui.autocomplete
 
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.frontparissportifs.R
@@ -60,6 +64,21 @@ class AutocompleteFragment : Fragment(), AutocompleteContract.View {
         autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             presenter.onChooseItemInAutocompleteList(parent.adapter.getItem(position) as String)
         }
+        autoCompleteTextView.setOnEditorActionListener { textView, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                presenter.performSearch(textView.editableText.toString())
+                return@setOnEditorActionListener false
+            }
+            return@setOnEditorActionListener false
+        }
+    }
+
+    override fun executeCloseKeyboard() {
+        autoCompleteTextView.clearFocus();
+        val inputMethodManager =
+            requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        // on below line hiding our keyboard.
+        inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0)
     }
 
     override fun onAttach(context: Context) {
@@ -75,13 +94,13 @@ class AutocompleteFragment : Fragment(), AutocompleteContract.View {
     }
 
     private fun subscribeObservers() {
-        presenter.dataState.observe(
+        presenter.allLeaguesNamesState.observe(
             this
         ) { response -> response?.let { processResponse(response) } }
     }
 
     private fun unsubscribeObservers() {
-        presenter.dataState.removeObservers(this)
+        presenter.allLeaguesNamesState.removeObservers(this)
     }
 
     private fun processResponse(response: DataState<List<String>>) {
@@ -95,13 +114,8 @@ class AutocompleteFragment : Fragment(), AutocompleteContract.View {
                     )
                 autoCompleteTextView.setAdapter(adapter)
             }
-            is DataState.Loading -> {
-                //displayLoading(true)
-            }
-            is DataState.Error -> {
-                //displayLoading(false)
-                displayError(requireContext(), response.exception.message)
-            }
+            is DataState.Loading -> {}
+            is DataState.Error -> { }
         }
     }
 
