@@ -15,6 +15,7 @@ constructor() : EntityMapper<TeamObjectResponse, Team> {
             name = entity.strTeam,
             description = entity.strDescriptionFR,
             badge = entity.strTeamBadge,
+            banner= entity.strTeamBanner,
             leagues = extractLeagues(entity),
             country = entity.strCountry
         )
