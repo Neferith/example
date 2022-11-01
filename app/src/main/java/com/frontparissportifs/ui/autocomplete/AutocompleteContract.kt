@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.frontparissportifs.ui.base.BaseContract
 import com.frontparissportifs.utils.DataState
 
-interface AutocompleteLeaguesContract : BaseContract {
+interface AutocompleteContract : BaseContract {
 
     interface View : BaseContract.View {
         fun updateCurrentKeywordSelected(keyword: String)

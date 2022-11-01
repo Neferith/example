@@ -49,6 +49,8 @@ class ResultFragment : Fragment(), ResultContract.View {
             ) { _, bundle ->
                 presenter.onUserSelectKeyword(bundle.getString("bundleKeyword").toString())
             }
+
+        swipeContainer.isEnabled = false
     }
 
     companion object {

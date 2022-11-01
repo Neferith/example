@@ -3,7 +3,7 @@ package com.frontparissportifs.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.frontparissportifs.R
-import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesFragment
+import com.frontparissportifs.ui.autocomplete.AutocompleteFragment
 import com.frontparissportifs.ui.result.ResultFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +15,7 @@ class SearchActivity : AppCompatActivity(){
         setContentView(R.layout.activity_search)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, AutocompleteLeaguesFragment.newInstance())
+                .replace(R.id.container, AutocompleteFragment.newInstance())
                 .commitNow()
         }
         if (savedInstanceState == null) {

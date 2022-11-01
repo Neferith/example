@@ -3,24 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.autocomplete.AutocompleteLeaguesFragment">
-
-
-
+    tools:context=".ui.autocomplete.AutocompleteFragment">
     <com.google.android.material.textfield.MaterialAutoCompleteTextView
-
-
         android:id="@+id/autoCompleteTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView"
-        android:layout_marginLeft="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="17dp"
+        android:layout_marginEnd="16dp"
+        android:drawableEnd="@drawable/ic_baseline_search_24"
         android:ems="10"
         android:text="">
-
         <requestFocus />
     </com.google.android.material.textfield.MaterialAutoCompleteTextView>
-
 </FrameLayout>

@@ -1,8 +1,8 @@
 package com.frontparissportifs.di
 
-import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesContract
-import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesModel
-import com.frontparissportifs.ui.autocomplete.AutocompleteLeaguesModelPresenter
+import com.frontparissportifs.ui.autocomplete.AutocompleteContract
+import com.frontparissportifs.ui.autocomplete.AutocompleteModel
+import com.frontparissportifs.ui.autocomplete.AutocompleteModelPresenter
 import com.frontparissportifs.ui.detail.DetailContract
 import com.frontparissportifs.ui.detail.DetailModel
 import com.frontparissportifs.ui.detail.DetailPresenter
@@ -19,12 +19,12 @@ import dagger.hilt.android.components.ActivityComponent
 abstract class PresenterModule {
 
     @Binds
-    abstract fun provideAutocompletePresenter(impl: AutocompleteLeaguesModelPresenter):
-            AutocompleteLeaguesContract.Presenter
+    abstract fun provideAutocompletePresenter(impl: AutocompleteModelPresenter):
+            AutocompleteContract.Presenter
 
     @Binds
-    abstract fun provideAutocompleteModel(impl: AutocompleteLeaguesModel):
-            AutocompleteLeaguesContract.Model
+    abstract fun provideAutocompleteModel(impl: AutocompleteModel):
+            AutocompleteContract.Model
 
     @Binds
     abstract fun provideResultPresenter(impl: ResultPresenter):

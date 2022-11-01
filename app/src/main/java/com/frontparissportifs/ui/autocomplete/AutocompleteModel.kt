@@ -7,15 +7,15 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class AutocompleteLeaguesModel @Inject constructor(
+class AutocompleteModel @Inject constructor(
     private val leagueRepository: LeagueRepository
-) : AutocompleteLeaguesContract.Model, CoroutineScope {
+) : AutocompleteContract.Model, CoroutineScope {
 
     private val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.IO
 
     override fun allSoccerLeagues(
-        onFinishedListener: AutocompleteLeaguesContract.Model.OnFinishedListener
+        onFinishedListener: AutocompleteContract.Model.OnFinishedListener
     ) {
         launch {
             leagueRepository.foundAllSoccerLeagues().onEach { dataState ->

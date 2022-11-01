@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import com.frontparissportifs.utils.DataState
 import javax.inject.Inject
 
-open class AutocompleteLeaguesModelPresenter @Inject constructor(
-    val model: AutocompleteLeaguesContract.Model
-) : AutocompleteLeaguesContract.Presenter,
-    AutocompleteLeaguesContract.Model.OnFinishedListener {
+open class AutocompleteModelPresenter @Inject constructor(
+    val model: AutocompleteContract.Model
+) : AutocompleteContract.Presenter,
+    AutocompleteContract.Model.OnFinishedListener {
 
-    var view: AutocompleteLeaguesContract.View? = null
+    var view: AutocompleteContract.View? = null
 
     private val _dataState: MutableLiveData<DataState<List<String>>> = MutableLiveData()
     override val dataState: LiveData<DataState<List<String>>>
@@ -25,7 +25,7 @@ open class AutocompleteLeaguesModelPresenter @Inject constructor(
     }
 
     override fun attach(
-        view: AutocompleteLeaguesContract.View
+        view: AutocompleteContract.View
     ) {
         this.view = view
         this.model.allSoccerLeagues(this)

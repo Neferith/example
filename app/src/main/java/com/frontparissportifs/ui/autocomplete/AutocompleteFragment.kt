@@ -1,7 +1,6 @@
 package com.frontparissportifs.ui.autocomplete
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,32 +12,35 @@ import com.frontparissportifs.R
 import com.frontparissportifs.utils.DataState
 import com.frontparissportifs.utils.displayError
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_autocomplete_leagues.*
+import kotlinx.android.synthetic.main.fragment_autocomplete.*
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
- * Use the [AutocompleteLeaguesFragment.newInstance] factory method to
+ * Use the [AutocompleteFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class AutocompleteLeaguesFragment : Fragment(), AutocompleteLeaguesContract.View {
+class AutocompleteFragment : Fragment(), AutocompleteContract.View {
 
     @Inject
-    lateinit var presenter: AutocompleteLeaguesContract.Presenter
+    lateinit var presenter: AutocompleteContract.Presenter
 
     @Inject
-    lateinit var model: AutocompleteLeaguesContract.Model
+    lateinit var model: AutocompleteContract.Model
 
     companion object {
-        fun newInstance() = AutocompleteLeaguesFragment()
+        fun newInstance() = AutocompleteFragment()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_autocomplete_leagues, container, false)
+        return inflater.inflate(
+            R.layout.fragment_autocomplete,
+            container,
+            false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +57,6 @@ class AutocompleteLeaguesFragment : Fragment(), AutocompleteLeaguesContract.View
             )
         autoCompleteTextView.threshold = 1
         autoCompleteTextView.setAdapter(adapter)
-        autoCompleteTextView.setTextColor(Color.RED)
         autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             presenter.onChooseItemInAutocompleteList(parent.adapter.getItem(position) as String)
         }
