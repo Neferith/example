@@ -48,6 +48,9 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
 
     private fun processResponse(response: Team) {
         team_title.text = response.name
+        team_country.text = response.country
+        team_league.text = response.leagues.map { it.name }.joinToString { "${it} " }
+        team_description.text = response.description
         val displayMetrics: DisplayMetrics = this.resources.displayMetrics
         Glide.with(team_container).load(response.banner).skipMemoryCache(true).fitCenter()
             .placeholder(com.google.android.material.R.color.material_grey_300)
