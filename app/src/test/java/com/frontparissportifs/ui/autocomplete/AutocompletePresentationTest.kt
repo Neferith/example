@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class AutocompleteModelTest {
+class AutocompletePresentationTest {
 
     companion object {
         private val DATA_STATE_SUCCESS: DataState<Boolean> = DataState.Success(true)
