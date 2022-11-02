@@ -5,13 +5,13 @@ import com.frontparissportifs.model.Team
 import com.frontparissportifs.ui.base.BaseContract
 import com.frontparissportifs.utils.DataState
 
-interface ResultContract {
+open interface ResultContract {
 
     interface View : BaseContract.View {
         fun goToDetail(team: Team)
     }
 
-    interface Model : BaseContract.Model {
+    open interface Model : BaseContract.Model {
         fun searchTeams(leagueName: String?, onResultListener: OnResultListener)
         interface OnResultListener {
             fun onReceivedResult(string: DataState<List<Team>>)

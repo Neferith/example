@@ -36,7 +36,6 @@ open class AutocompleteModelPresenter @Inject constructor(
                     is DataState.Error -> {}
                 }
             }
-
         })
     }
 

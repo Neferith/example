@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class ResultModel @Inject constructor(
+open class ResultModel @Inject constructor(
     private val teamRepository: TeamRepository
 ) : ResultContract.Model, CoroutineScope {
 
