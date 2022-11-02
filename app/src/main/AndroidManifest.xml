@@ -21,7 +21,7 @@
             android:exported="false"
             android:label="@string/title_activity_detail"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="locked"
             android:theme="@style/Theme.FrontParisSportifs.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
@@ -30,7 +30,7 @@
         <activity
             android:name=".ui.main.SearchActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
+            android:screenOrientation="locked"
             android:exported="true"
             android:theme="@style/Theme.FrontParisSportifs.NoActionBar">
             <intent-filter>

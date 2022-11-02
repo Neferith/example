@@ -41,19 +41,19 @@ class TeamRepositoryTest {
     }
 
     @Test
-    fun twoSentence() = runTest {
+    fun getByLeaguesTwoSentence() = runTest {
         val sentencesNumber = repository.getByLeagues("French Ligue 1").count()
         assertEquals(sentencesNumber, 2)
     }
 
     @Test
-    fun firsSentenceLoading() = runTest {
+    fun getByLeaguesFirsSentenceLoading() = runTest {
         val dataState = repository.getByLeagues("French Ligue 1").first()
         assertEquals(dataState, DataState.Loading)
     }
 
     @Test
-    fun secondSentenceResult() = runTest {
+    fun getByLeaguesSecondSentenceResult() = runTest {
         val dataState = repository.getByLeagues("French Ligue 1").last()
         assertEquals(dataState, DataState.Success(TEAM_CONVERT_LIST))
     }
