@@ -7,6 +7,7 @@ import javax.inject.Inject
 class CacheMapper
 @Inject
 constructor() : EntityMapper<LeagueCacheEntity, League> {
+
     override fun mapFromEntity(entity: LeagueCacheEntity): League {
         return League(
             id = entity.id,
@@ -23,10 +24,6 @@ constructor() : EntityMapper<LeagueCacheEntity, League> {
             sport = domainModel.sport,
             alternateName = domainModel.alternateName
         )
-    }
-
-    fun mapFromEntityList(entities: List<LeagueCacheEntity>): List<League> {
-        return entities.map { mapFromEntity(it) }
     }
 
     fun mapFromEntityListToListString(entities: List<LeagueCacheEntity>): List<String> {

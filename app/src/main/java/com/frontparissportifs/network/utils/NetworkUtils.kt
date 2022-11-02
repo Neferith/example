@@ -33,6 +33,5 @@ fun hasNetwork(context: Context): Boolean {
             }
         }
     }
-
     return result
 }

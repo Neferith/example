@@ -28,7 +28,7 @@ open class AutocompleteModelPresenter @Inject constructor(
             override fun onFinished(result: DataState<Boolean>) {
                 when (result) {
                     is DataState.Success<Boolean> -> {
-                        if(result.data == true) {
+                        if(result.data) {
                             view?.updateCurrentKeywordSelected(keyword)
                         }
                     }
@@ -50,8 +50,8 @@ open class AutocompleteModelPresenter @Inject constructor(
         this.model.allSoccerLeagues(this)
     }
 
-    override fun onFinished(string: DataState<List<String>>) {
-        _allLeaguesNamesState.value = string
+    override fun onFinished(result: DataState<List<String>>) {
+        _allLeaguesNamesState.value = result
     }
 
 }

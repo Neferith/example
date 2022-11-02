@@ -8,6 +8,4 @@ interface TeamApi {
     @GET("search_all_teams.php")
     suspend fun getByLeagues(@Query("l") leagueName: String): TeamResponse
 
-    suspend fun getTeamByid()
-
 }

@@ -16,7 +16,7 @@ import javax.inject.Singleton
 class RoomModule {
     @Singleton
     @Provides
-    fun provideTeamgDb(@ApplicationContext context: Context): LeagueDatabase {
+    fun provideTeamDb(@ApplicationContext context: Context): LeagueDatabase {
         return Room.databaseBuilder(
             context, LeagueDatabase::class.java,
             LeagueDatabase.DATABASE_NAME
@@ -30,4 +30,5 @@ class RoomModule {
     fun provideTeamDAO(leagueDatabase: LeagueDatabase): LeagueDao {
         return leagueDatabase.leagueDao()
     }
+
 }

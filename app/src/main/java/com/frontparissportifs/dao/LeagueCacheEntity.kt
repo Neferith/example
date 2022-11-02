@@ -20,4 +20,5 @@ data class LeagueCacheEntity (
 
     @ColumnInfo(name = "alternateName")
     val alternateName:String?
+
 )

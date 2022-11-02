@@ -35,4 +35,5 @@ class AutocompleteModel @Inject constructor(
             }.launchIn(MainScope())
         }
     }
+
 }

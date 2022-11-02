@@ -24,4 +24,5 @@ class SearchActivity : AppCompatActivity(){
                 .commitNow()
         }
     }
+
 }

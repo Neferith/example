@@ -12,4 +12,5 @@ data class League(
 
     constructor( id:String,
                  name:String) : this(id,name,null,null)
+
 }

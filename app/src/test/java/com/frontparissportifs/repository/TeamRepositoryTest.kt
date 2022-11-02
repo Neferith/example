@@ -25,7 +25,6 @@ class TeamRepositoryTest {
         private val TEAM_RESPONSE: TeamResponse = mockk()
         private val TEAM_API_RESULT: List<TeamObjectResponse> = mockk()
         private val TEAM_CONVERT_LIST: List<Team> = mockk()
-
     }
 
     private val api: TeamApi = mockk()

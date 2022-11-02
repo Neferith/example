@@ -24,7 +24,6 @@ object ApiClient {
 
     private const val BASE_URL: String = "https://www.thesportsdb.com/api/v1/json/2/"
 
-
     @Singleton
     @Provides
     fun provideGsonBuilder(): Gson {
@@ -38,9 +37,7 @@ object ApiClient {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
-
     }
-
 
     @Singleton
     @Provides
@@ -48,7 +45,6 @@ object ApiClient {
         val cacheSize = 10 * 1024 * 1024
         return Cache(appContext.cacheDir, cacheSize.toLong())
     }
-
 
     @Singleton
     @Provides
@@ -76,7 +72,6 @@ object ApiClient {
         }.build()
     }
 
-
     @Singleton
     @Provides
     fun provideTeamService(retrofit: Retrofit.Builder): TeamApi {
@@ -92,4 +87,5 @@ object ApiClient {
             .build()
             .create(LeagueApi::class.java)
     }
+
 }

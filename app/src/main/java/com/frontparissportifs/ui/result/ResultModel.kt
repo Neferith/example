@@ -24,4 +24,5 @@ open class ResultModel @Inject constructor(
                 .launchIn(MainScope())
         }
     }
+
 }

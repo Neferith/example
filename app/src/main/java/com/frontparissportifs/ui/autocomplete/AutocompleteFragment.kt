@@ -9,12 +9,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
-import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.frontparissportifs.R
 import com.frontparissportifs.utils.DataState
-import com.frontparissportifs.utils.displayError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_autocomplete.*
 import javax.inject.Inject
@@ -77,7 +75,6 @@ class AutocompleteFragment : Fragment(), AutocompleteContract.View {
         autoCompleteTextView.clearFocus();
         val inputMethodManager =
             requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        // on below line hiding our keyboard.
         inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0)
     }
 

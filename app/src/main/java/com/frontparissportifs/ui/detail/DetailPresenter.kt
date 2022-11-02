@@ -26,4 +26,5 @@ class DetailPresenter @Inject constructor(
     override fun detach() {
         this.view = null
     }
+
 }

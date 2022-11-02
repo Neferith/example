@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity(), DetailContract.View {
 
