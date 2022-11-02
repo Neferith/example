@@ -72,10 +72,10 @@ class AutocompleteFragment : Fragment(), AutocompleteContract.View {
     }
 
     override fun executeCloseKeyboard() {
-        autoCompleteTextView.clearFocus();
+        autoCompleteTextView.clearFocus()
         val inputMethodManager =
             requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0)
+        inputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.windowToken, 0)
     }
 
     override fun onAttach(context: Context) {
