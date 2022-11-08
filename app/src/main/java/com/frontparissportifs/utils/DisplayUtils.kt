@@ -5,7 +5,7 @@ import android.content.res.Resources
 import android.widget.Toast
 
 fun displayError(context: Context, message: String?) {
-    if (message.isNullOrEmpty()) {
+    if (!message.isNullOrEmpty()) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     } else {
         Toast.makeText(context, "Unknown error", Toast.LENGTH_LONG).show()
